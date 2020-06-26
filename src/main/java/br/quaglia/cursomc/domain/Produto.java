@@ -18,7 +18,7 @@ public class Produto implements Serializable {
     private String nome;
     private Double preco;
 
-    @ManyToMany(mappedBy = "categorias")
+    @ManyToMany(mappedBy = "produtos")
     private List<Categoria> categorias = new ArrayStack<>();
 
     public Produto() {
