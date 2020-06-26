@@ -1,35 +1,33 @@
 package br.quaglia.cursomc.domain;
 
+import org.apache.tomcat.util.digester.ArrayStack;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Categoria implements Serializable {
+public class Produto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer id;
+    private Integer id;
     private String nome;
+    private Double preco;
 
-    @ManyToMany
-    @JoinTable(
-            name = "produto_categoria",
-            joinColumns = @JoinColumn(name = "produto_id"),
-            inverseJoinColumns = @JoinColumn(name = "categoria_id")
-    )
-    private List<Produto> produtos = new ArrayList<>();
+    @ManyToMany(mappedBy = "categorias")
+    private List<Categoria> categorias = new ArrayStack<>();
 
-    public Categoria() {
+    public Produto() {
     }
 
-    public Categoria(Integer id, String nome) {
+    public Produto(Integer id, String nome, Double preco) {
         this.id = id;
         this.nome = nome;
+        this.preco = preco;
     }
 
     public Integer getId() {
@@ -48,24 +46,24 @@ public class Categoria implements Serializable {
         this.nome = nome;
     }
 
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Categoria categoria = (Categoria) o;
-        return getId().equals(categoria.getId());
+        Produto produto = (Produto) o;
+        return getId().equals(produto.getId());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getId());
-    }
-
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
     }
 }
