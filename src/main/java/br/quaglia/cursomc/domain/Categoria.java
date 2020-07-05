@@ -1,7 +1,5 @@
 package br.quaglia.cursomc.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,7 +16,6 @@ public class Categoria implements Serializable {
     public Integer id;
     private String nome;
 
-    @JsonManagedReference
     @ManyToMany
     @JoinTable(
             name = "produto_categoria",

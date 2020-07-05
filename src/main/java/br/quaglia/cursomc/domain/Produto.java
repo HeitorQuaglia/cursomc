@@ -1,6 +1,5 @@
 package br.quaglia.cursomc.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.tomcat.util.digester.ArrayStack;
 
@@ -19,9 +18,9 @@ public class Produto implements Serializable {
     private String nome;
     private Double preco;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany(mappedBy = "produtos")
-    private List<Categoria> categorias = new ArrayStack<>();
+    private final List<Categoria> categorias = new ArrayStack<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "id.produto")
