@@ -2,13 +2,16 @@ package br.quaglia.cursomc.domain;
 
 import br.quaglia.cursomc.domain.enums.EstadoPagamento;
 
-public class PagamentoComCartao extends Pagamento{
+import javax.persistence.Entity;
+
+@Entity
+public class PagamentoComCartao extends Pagamento {
 
     private static final long serialVersionUID = 1L;
 
     private Integer numeroDeParcelas;
 
-    public PagamentoComCartao(){
+    public PagamentoComCartao() {
     }
 
     public PagamentoComCartao(Integer id, EstadoPagamento estado, Pedido pedido, Integer numeroDeParcelas) {

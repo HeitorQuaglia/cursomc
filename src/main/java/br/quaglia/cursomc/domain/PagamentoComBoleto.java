@@ -2,8 +2,10 @@ package br.quaglia.cursomc.domain;
 
 import br.quaglia.cursomc.domain.enums.EstadoPagamento;
 
+import javax.persistence.Entity;
 import java.util.Date;
 
+@Entity
 public class PagamentoComBoleto extends Pagamento {
 
     private static final long serialVersionUID = 1L;

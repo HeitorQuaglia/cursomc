@@ -2,21 +2,22 @@ package br.quaglia.cursomc.domain;
 
 import br.quaglia.cursomc.domain.enums.EstadoPagamento;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Pagamento implements Serializable {
+@Entity
+public abstract class Pagamento implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private EstadoPagamento estado;
+    private Integer estado;
 
+    @OneToOne
+    @JoinColumn(name = "coluna_id")
+    @MapsId
     private Pedido pedido;
 
     public Pagamento() {
@@ -24,7 +25,7 @@ public class Pagamento implements Serializable {
 
     public Pagamento(Integer id, EstadoPagamento estado, Pedido pedido) {
         this.id = id;
-        this.estado = estado;
+        this.estado = estado.getCodigo();
         this.pedido = pedido;
     }
 
@@ -37,11 +38,11 @@ public class Pagamento implements Serializable {
     }
 
     public EstadoPagamento getEstado() {
-        return estado;
+        return EstadoPagamento.toEnum(estado);
     }
 
     public void setEstado(EstadoPagamento estado) {
-        this.estado = estado;
+        this.estado = estado.getCodigo();
     }
 
     public Pedido getPedido() {
